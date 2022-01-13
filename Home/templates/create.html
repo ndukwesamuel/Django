@@ -8,14 +8,18 @@
 </head>
 <body>
 
-    <h1> working</h1>
-    <a href="{% url 'create'  %}"> <button> Create</button></a>
+    <h1>  Create</h1> 
 
-    <div> 
+        <!-- {{form}} -->
+    
+    <form action="" method="post">
 
-        <h1> {{todo.name}}</h1> 
-        <h2>{{todo.due_date}} </h2>
-    </div>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit"> Submit</button>
+
+    </form>
     
 </body>
 </html>

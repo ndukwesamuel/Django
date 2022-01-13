@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect 
 
 # Create your views here.
 
 from Home.models import TodoData
+from Home.forms import TodoForm
 
 
 def home(request):
@@ -10,7 +11,6 @@ def home(request):
     context ={
         'todolist':todos
     }
-
 
     return render( request, 'index.html', context)
 
@@ -23,3 +23,25 @@ def todo_detail(request, id):
     }
 
     return render(request, 'detail.html', context)
+
+
+
+
+def todo_create(request):
+    form  = TodoForm(request.POST or None)
+    if form.is_valid():
+        print(form)
+        form.save()
+        return redirect('/')
+    else:
+        print('bad')
+
+    context = {
+        'form': form
+    }
+    
+
+    return render(request, 'create.html', context)
+
+
+
